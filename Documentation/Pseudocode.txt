@@ -1,0 +1,107 @@
+
+defining view_and_delete_schedules function
+    command = cmd prompt('schtasks /query | findstr /i "Created"')
+	result = subprocess(command)
+	choice = (enumerate lines(result))
+	print (result)
+	askuser = input "delete schedule? y/n - "
+	min = 0
+	if askuser == y:
+	    print(choice)
+		nowask = "type the number beside the schedule u want to delete"
+		if nowask <= min
+			 deletecmd = result(nowask)  
+			 cmd prompt ( 'schtasks /delete /tn "' + deletecmd + '" /f'
+		else
+		    Print 'invalid input'
+	elif askuser == n:
+        print "returning to main menu"
+		main_menu
+	
+defining log_scheduler
+    askuser = input "What time would you like the script to run everyday?"
+	time  = timestamp
+	uniquefilename = "Created" + time
+	longstring_for_ps1_lines = poweshell script e.g. "Start-Process powershell -Verb runAs \n"
+    "$action = New-ScheduledTaskAction -Execute 'Python.exe' -Argument 'C:\Security-Logs-Schedules\CREATEFILEWITHLOGDATA.py'\n",
+    "$trigger = New-ScheduledTaskTrigger -Daily -At " + time + "\n",
+    "Register-ScheduledTask -Action $action -Trigger $trigger -TaskName '" + uniquefilename +
+    "' -Description 'This creates logs of the latest authentications recorded at the set time in the Python Assessment Folder'\n"
+    	
+	create file called uniquefilename to write into
+	write longstring_for_ps1_lines
+	save and exit file
+		
+	cmd prompt ( powershell 'locationOfTheScript\uniquefilename.ps1'
+		
+	
+defining da_file_eyes
+    files = list current working directory but only .txt files
+	enumerate files
+	askuser = "which line would you like to read?"
+	min = 0
+	if askuser <= min
+	    setchoice = (files[askuser])
+	    open file in working directory called setchoice to read
+	elif askuser == 
+	    print 'u forgot to type'
+	else 
+	    print invalid input
+		
+defining  da_file_genie
+    time = timestamp
+	logname = AuthenticationLog + time + .txt
+	create file called logname to write into
+	cmd prompt (audit event log and export data to file - "powershell Get-EventLog -logname security -instanceid 4625,4624 -newest 10 > + logname")
+	
+defining ReRun
+    askuser = input "Return to the main menu? (y/n):"
+	if askuser == y
+	    main_menu
+	elif askuser == n
+	    print 'ok, goodbye then.'
+		break/finish script
+	else
+	    print invalid input
+		ReRun
+
+defining the main_menu
+    print  print("                                    Please Select a number corresponding with the function:")
+    print(" ")
+    print("                                                  Through Event Viewer")
+    print("                      1 = 5 latest successful login logs   |    2 = 5 latest unsuccessful login logs")
+    print("                                                     Export to File")
+    print("              3 = Save 10 latest authentication attempts to a text file  |  4 = File Viewer (views all text files)")
+    print("                                                       Scheduler")
+    print("           5 = Schedule option 3 to run at a particular time    |    6 = Schedule Viewer (views and deletes schedules)")
+    print("Exit:")
+    print("7 = Close")
+    askuser = input "input number and press enter - "
+	if askuser == 1
+	    output = cmd prompt ( powershell get windows event ID 4624)
+		print output
+		ReRun
+	elif askuser == 2
+	    output = cmd prompt ( powershell get windows event ID 4625)
+		print output
+		ReRun
+	elif askuser == 3	
+	    da_file_genie
+		ReRun
+	elif askuser == 4
+	    da_file_eyes
+		ReRun
+	elif askuser == 5
+        log_scheduler
+        ReRun		
+	elif askuser == 6
+	    view_and_delete_schedules
+		ReRun
+	elif askuser == 7
+	    print "goodbye"
+		break/shutdown script
+	else 
+	    print 'Invalid Input'
+	
+	
+	
